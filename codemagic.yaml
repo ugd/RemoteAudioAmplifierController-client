@@ -6,7 +6,7 @@ workflows:
       - name: Switch to a specific version of Cordova
         script: |
           set -e # exit on first failed command
-
+          npm install -g @quasar/cli
           quasar mode add cordova
       - name: Add iOS platform
         script: |
