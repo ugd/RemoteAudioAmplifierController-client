@@ -7,14 +7,14 @@ workflows:
         script: |
           set -e # exit on first failed command
 
-          cvm install 9.0.0
-          cvm use 9.0.0
+          quasar mode add cordova
       - name: Add iOS platform
         script: |
           set -e # exit on first failed command
 
-          cordova platform remove ios --nosave
-          cordova platform add ios --confirm --no-interactive --noresources --save
+          cordova platform add
+          cordova plugin add cordova-plugin-ionic-webview
+          cordova plugin add cordova-plugin-wkwebview-engine
       - name: Build iOS release
         script: |
           set -e # exit on first failed command
