@@ -1,0 +1,6 @@
+workflows:
+  audio-controller:
+    name: Audio Controller
+    scripts:
+      - name: Build for iOS         # Name of the section
+        script: quasar build -m cordova -T ios   # The script(s) to be run in that section
