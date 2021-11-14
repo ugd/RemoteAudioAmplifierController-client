@@ -15,6 +15,6 @@ workflows:
         script: |
           set -e # exit on first failed command
           quasar build -m cordova -T ios
-          ls ./dist/cordova/
+          ls ./dist/cordova/ios
     artifacts:
-      - /dist/cordova/*.ipa
+      - /dist/cordova/ios/*.ipa
