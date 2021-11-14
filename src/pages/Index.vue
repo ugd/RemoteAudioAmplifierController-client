@@ -6,45 +6,61 @@
       style="width: 200px; height: 200px"
     > -->
     <q-card>
-      <h1>Connected: {{ status }}</h1>
+      <h1>Status: {{ statusText }}</h1>
       <q-btn
         color="green"
         text-color="black"
+        style="margin-left: 10px"
         v-on:click="setLedStatus"
         label="Led Light"
       />
-      <q-btn color="red" text-color="black" v-on:click="setPowerStatus" label="Power" />
+      <q-btn
+        color="red"
+        text-color="black"
+        style="margin-left: 10px"
+        v-on:click="setPowerStatus"
+        label="Power"
+      />
       <!-- <q-btn label="Led" v-on:click="setLedStatus" ></q-btn> -->
-      <q-slider
-        v-model="mainVol"
-        @change="setMainVol"
-        label-value="Main Volume"
-        markers
-        :step="1"
-        label-always
-        :min="0"
-        :max="63"
-      />
-      <q-slider
-        v-model="bassVol"
-        @change="setBassVol"
-        label-value="Bass Volume"
-        markers
-        :step="1"
-        label-always
-        :min="0"
-        :max="63"
-      />
-      <q-slider
-        v-model="highVol"
-        @change="setHighVol"
-        label-value="High Volume"
-        markers
-        :step="1"
-        label-always
-        :min="0"
-        :max="63"
-      />
+      <div style="padding: 30px">
+        <q-slider
+          v-model="mainVol"
+          @change="setMainVol"
+          label-value="Main Volume"
+          markers
+          reverse
+          :step="1"
+          label-always
+          :min="0"
+          :max="63"
+        />
+      </div>
+      <div style="padding: 30px">
+        <q-slider
+          v-model="bassVol"
+          @change="setBassVol"
+          label-value="Bass Volume"
+          markers
+          reverse
+          :step="1"
+          label-always
+          :min="0"
+          :max="63"
+        />
+      </div>
+      <div style="padding: 30px">
+        <q-slider
+          v-model="highVol"
+          @change="setHighVol"
+          label-value="High Volume"
+          markers
+          reverse
+          :step="1"
+          label-always
+          :min="0"
+          :max="63"
+        />
+      </div>
     </q-card>
   </q-page>
 </template>
@@ -62,6 +78,7 @@ export default {
       highVol: 63,
       bassVol: 63,
       power: false,
+      statusText: "Not Initialized",
     };
   },
   methods: {
@@ -106,10 +123,12 @@ export default {
     this.socket = io("http://10.10.10.123:9090/");
     this.socket.on("connect", () => {
       this.status = true;
+      this.statusText = "Connected";
       console.log("STATUS", "connected");
     });
     this.socket.on("disconnect", () => {
       this.status = false;
+      this.statusText = "Disconnected";
       console.log("STATUS", "disconnected");
     });
   },
