@@ -14,7 +14,6 @@ workflows:
           cd ./src-cordova
           cordova platform add ios
           cordova plugin add cordova-plugin-ionic-webview
-          cordova plugin add cordova-plugin-wkwebview-engine
       - name: Build iOS release
         script: |
           set -e # exit on first failed command
