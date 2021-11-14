@@ -11,11 +11,12 @@ workflows:
       - name: Add iOS platform
         script: |
           set -e # exit on first failed command
-
+          cd ./src-cordova
           cordova platform add ios
           cordova plugin add cordova-plugin-ionic-webview
           cordova plugin add cordova-plugin-wkwebview-engine
       - name: Build iOS release
         script: |
           set -e # exit on first failed command
+          cd ../
           quasar build -m cordova -T ios
